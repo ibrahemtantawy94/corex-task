@@ -20,13 +20,19 @@ class GithubReposController extends Controller
      */
     public function fetchDataFromGithub(Request $request)
     {
-        $query = $request->input('search');
-        $date = $request->input('date');
+        $date = $request->input('date') ?: '2019-01-10';
+        $language = $request->input('language');
+        $top = $request->input('top');
+        $url = "https://api.github.com/search/repositories?";
+        $query = "q=created:>$date";
+        $query = $language ? $query . "+language:$language" : $query;
+        $query .= "&per_page=$top&sort=stars&order=desc";
+        $response = Http::get($url.$query);
 
-        $response = Http::get("https://api.github.com/search/repositories?q=created:%3E2019-01-10&sort=stars&order=desc");
+        $items = isset($response->json()['items']) ? $response->json()['items'] : null;
 
         return view('data', [
-            'items' => $response->json()['items']
+            'items' => $items
         ]);
     }
 }

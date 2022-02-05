@@ -18,7 +18,7 @@
                 <div class="form-group">
                     <input type="text" class="form-control" id="language" name="language" placeholder="Programing language">
                     <input type="date" class="form-control" id="date" name="date" placeholder="date">
-                    <select class="custom-select ml-2" name="top">
+                    <select class="custom-select ml-2" name="top" id="top">
                         <option value="10">View the top 10</option>
                         <option value="50">View the top 50</option>
                         <option value="100">View the top 100</option>
@@ -27,6 +27,28 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
-</body>
+
+        <div class="d-flex justify-content-center">
+            <h3>Github Repos</h3>
+        </div>
+        <div class="container h-100" id="results">
+                @if(isset($items))
+                    @foreach ($items as $item)
+                        <div class="row h-100 justify-content-center align-items-center">
+                            <div class="card w-75 my-3">
+                                <div class="card-body">
+                                    <p class="card-text ">Repository :  {{$item['name']}}</p>
+                                    <p class="card-text">Stars:  {{$item['stargazers_count']}}</p>
+                                    <p class="card-text">Owner:  {{$item['owner']['login']}}</p>
+                                    <p class="card-text">Language:  {{$item['language']}}</p>
+                                    <p class="card-text">Date:  {{$item['created_at']}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
+
+    </body>
 
 </html>

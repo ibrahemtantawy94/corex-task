@@ -13,8 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/test', function () {
     return view('welcome');
 });
 
-Route::get('/github', 'GithubReposController@index');
+Route::get('/', 'GithubReposController@index');
+Route::post('/', 'GithubReposController@fetchDataFromGithub');

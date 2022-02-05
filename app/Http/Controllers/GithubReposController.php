@@ -24,10 +24,10 @@ class GithubReposController extends Controller
         $language = $request->input('language');
         $top = $request->input('top');
         $url = "https://api.github.com/search/repositories?";
-        $query = "q=created:>$date";
-        $query = $language ? $query . "+language:$language" : $query;
-        $query .= "&per_page=$top&sort=stars&order=desc";
-        $response = Http::get($url.$query);
+        $queryString = "q=created:>$date";
+        $queryString = $language ? $queryString . "+language:$language" : $queryString;
+        $queryString .= "&per_page=$top&sort=stars&order=desc";
+        $response = Http::get($url.$queryString);
 
         $items = isset($response->json()['items']) ? $response->json()['items'] : null;
 

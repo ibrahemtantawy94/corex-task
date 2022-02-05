@@ -13,9 +13,8 @@ class GithubReposTest extends TestCase
      */
     public function testExample()
     {
-        $response = $this->getJson('/github');
+        $response = $this->getJson('/');
         $response->assertStatus(200);
-        $response->assertJson(["incomplete_results" => true]);
     }
 
 }
